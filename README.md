@@ -79,7 +79,7 @@ conda install pytorch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 pytorch-cuda=
 Install MiroTrain. Clone the repository and install MiroTrain:
 
 ```bash
-git clone https://github.com/MiroMindAsia/mirotrain
+git clone https://github.com/MiroMindAI/mirotrain
 cd mirotrain
 pip install ./torchtune
 pip install .
