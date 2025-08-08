@@ -59,7 +59,7 @@ For the fastest setup, we provide a pre-built Docker image with all dependencies
 docker pull miromind/mirotrain:0.1.0-cuda12.6-pytorch2.6.0
 
 # Run the container with GPU support
-docker run --gpus all -it --rm \
+docker run --shm-size=8g --gpus all -it --rm \
   -v $(pwd):/workspace \
   -w /workspace \
   miromind/mirotrain:0.1.0-cuda12.6-pytorch2.6.0
