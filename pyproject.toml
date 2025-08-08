@@ -74,7 +74,7 @@ Documentation = "https://github.com/MiroMindAsia/mirotrain"
 Issues = "https://github.com/MiroMindAsia/mirotrain/issues"
 
 [project.scripts]
-tune = "torchtune.torchtune._cli.tune:main"
+tune = "torchtune._cli.tune:main"
 
 [project.optional-dependencies]
 
