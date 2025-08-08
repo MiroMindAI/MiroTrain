@@ -5,6 +5,7 @@
 <p align="center">
 <a href="https://huggingface.co/miromind-ai"><img src="https://img.shields.io/badge/-gery?style=social&label=%F0%9F%A4%97%20Huggingface" alt="HuggingFace" style="height: 20px;"></a>
 <a href="https://x.com/miromind_ai"><img src="https://img.shields.io/badge/-grey?style=social&logo=x&label=MiroMindAI" alt="X" style="height: 20px;"></a>
+<a href="https://www.xiaohongshu.com/user/profile/663098830000000003033edc"><img src="https://img.shields.io/badge/-grey?style=social&logo=red&label=RedNote" alt="小红书" style="height: 20px;"></a>
 <a href="https://discord.gg/EprKHYcm"><img src="https://img.shields.io/badge/-grey?style=social&logo=discord&label=Discord" alt="Discord" style="height: 20px;"></a>
 <a href="https://github.com/user-attachments/assets/214ab129-a880-4882-8ae3-2702c0ed850b"><img src="https://img.shields.io/badge/-grey?style=social&logo=wechat&label=WeChat" alt="WeChat" style="height: 20px;"></a>
 <a href="https://miromind.ai"><img src="https://img.shields.io/badge/-grey?style=social&logo=google-chrome&label=miromind.ai" alt="miromind.ai" style="height: 20px;"></a>
@@ -15,11 +16,11 @@
 </p>
 
 
-## 🎉 News
+## News
 
 - **[2025/08]** MiroTrain-v0.1 is released, support post-training [MiroThinker](https://github.com/MiroMindAI/MiroThinker)!
 
-## 📖 Overview 
+## Overview 
 
 **MiroTrain** is an efficient, algorithm-first framework for post-training large agentic models. Built on top of the open-source project [TorchTune](https://github.com/pytorch/torchtune), it delivers enhanced training recipes for **SFT** and **DPO**, supports post-training  of 32B-scale LLMs on agentic datasets on a single GPU node with 8×80GB GPUs, and enables seamless scaling of post-training workloads to **hundreds of GPUs**.
 
@@ -45,7 +46,7 @@
 For GRPO (Group Relative Policy Optimization) training, please refer to **[MiroRL](https://github.com/MiroMindAsia/mirorl)**: An MCP-first Reinforcement Learning Framework for Deep Research Agent
 
 
-## 🛠️ Installation
+## Installation
 
 MiroTrain is tested with the latest stable PyTorch releases (2.5, 2.6, and 2.7). We recommend using Python 3.10+ and CUDA 12.1+ for optimal performance.
 
@@ -84,7 +85,7 @@ pip install ./torchtune
 pip install .
 ```
 
-## 🚀 Quick Start on Single-Node
+## Quick Start on Single-Node
 
 This guide demonstrates how to run MiroTrain on a single node with 8×80GB GPUs using Qwen3-32B as an example.
 
@@ -125,7 +126,7 @@ torchrun \
   --config ./configs/qwen3/32B_full_dpo.yaml
 ```
 
-## 📚 Usage Guide
+## Usage Guide
 
 [Usage Guide](docs/usage.md)
 
@@ -137,7 +138,7 @@ torchrun \
 - [Grouped GEMM](https://github.com/fanshiqing/grouped_gemm) for efficient grouped matrix operations in MoE model training
 - [Flash Attention](https://github.com/Dao-AILab/flash-attention) for high-performance attention implementations
 
-## 🖊️ Citation
+## Citation
 
 ```bibtex
 @misc{2025mirotrain,
@@ -148,5 +149,5 @@ torchrun \
 }
 ```
 
-## 📄 License
+## License
 This project is released under the [Apache License 2.0](LICENSE). Please also adhere to the Licenses of models and datasets being used.
