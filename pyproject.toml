@@ -1,0 +1,115 @@
+# ---- All project specifications ---- #
+[project]
+name = "mirotrain"
+description = "mirotrain enhanced large model post-training"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {file = "LICENSE"}
+authors = [
+    { name = "MiroMind Team", email = "team@miromind.ai" },
+]
+keywords = ["pytorch", "post-training", "finetuning"]
+dependencies = [
+    # Stable torchdata (no nightly support)
+    "torchdata",
+
+    # Liger Kernel
+    "liger-kernel",
+
+    # Hugging Face integrations
+    "datasets",
+    "huggingface_hub[hf_transfer]",
+    "safetensors",
+
+    # Kaggle Integrations
+    "kagglehub",
+
+    # Tokenization
+    "sentencepiece",
+    "tiktoken",
+    "blobfile>=2",
+    "tokenizers",
+
+    # Miscellaneous
+    "numpy",
+    "tqdm",
+    "omegaconf",
+    "psutil",
+
+    # Multimodal
+    "Pillow>=9.4.0",
+
+    # TorchAO for TorchTune
+    "torchao",
+
+    # Flash Attention
+    "flash-attn==2.7.3",
+
+    # Transformers
+    "transformers>=4.46.3",
+
+    # Grouped GEMM dependency
+    "grouped_gemm @ git+https://github.com/fanshiqing/grouped_gemm@v1.1.4",
+
+    # Devlopment Packages
+    "bitsandbytes>=0.43.0",
+    "comet_ml>=3.44.2",
+    "mlflow",
+    "pre-commit",
+    "pytest==7.4.0",
+    "pytest-cov",
+    "pytest-mock",
+    "pytest-integration",
+    "tensorboard",
+    # Pin urllib3 to avoid transient error from https://github.com/psf/requests/issues/6443
+    "urllib3<2.0.0",
+    "wandb",
+    "expecttest",
+]
+dynamic = ["version"]
+
+[project.urls]
+GitHub = "https://github.com/MiroMindAsia/mirotrain"
+Documentation = "https://github.com/MiroMindAsia/mirotrain"
+Issues = "https://github.com/MiroMindAsia/mirotrain/issues"
+
+[project.scripts]
+tune = "torchtune.torchtune._cli.tune:main"
+
+[project.optional-dependencies]
+
+
+[tool.setuptools.dynamic]
+version = {attr = "mirotrain.__version__"}
+
+
+# ---- Explicit project build information ---- #
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = [""]
+include = ["mirotrain*"]
+
+
+
+
+# ---- Tooling specifications ---- #
+[tool.usort]
+first_party_detection = false
+
+[tool.black]
+target-version = ["py38"]
+
+[tool.pydoclint]
+style = 'google'
+check-return-types = 'False'
+exclude = 'tests/torchtune/models/(\w+)/scripts/|tests/mirotrain/|recipes/|torchtune/modules/_export|mirotrain/modules/_export|experiments/'
+
+[tool.pytest.ini_options]
+addopts = ["--showlocals", "--import-mode=prepend", "--without-integration", "--without-slow-integration"]
+# --showlocals will show local variables in tracebacks
+# --import-mode=prepend will add the root (the parent dir of torchtune/, mirotrain/, tests/, recipes/)
+# to `sys.path` when invoking pytest, allowing us to treat `tests` as a package within the tests.
+# --without-integration and --without-slow-integration: default to running unit tests only

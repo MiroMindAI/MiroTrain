@@ -1,0 +1,114 @@
+output_dir: /pfs/training-out
+
+use_flash_attention: True  # suggest to use flash attention to avoid OOM and speed up training
+
+# Parallelism
+ulysses_sequence_parallel_size: 1
+moe_expert_parallel_size: 1
+
+# Memory management
+enable_activation_checkpointing: True  # True reduces memory
+enable_activation_offloading: False  # True reduces memory
+
+# Tokenizer
+tokenizer:
+  _component_: mirotrain.models.qwen3.qwen3_tokenizer_auto
+  path: /pfs/training-data/hf/models/Qwen/Qwen3-30B-A3B
+  max_seq_len: 32768
+
+# Dataset
+dataset:
+  _component_: torchtune.datasets.alpaca_cleaned_dataset
+  source: "yahma/alpaca-cleaned"
+  streaming_pack: True
+  packed_seq_len: 32768
+
+
+seed: 1024
+shuffle: True
+
+# seed: null
+# shuffle: True
+
+# Model Arguments
+model:
+  _component_: mirotrain.models.qwen3_moe.qwen3_30b_a3b
+  router_aux_loss_coef: 0.001
+  use_grouped_gemm: True
+
+checkpointer:
+  _component_: torchtune.training.FullModelHFCheckpointer
+  checkpoint_dir: /pfs/training-data/hf/models/Qwen/Qwen3-30B-A3B
+  checkpoint_files:
+    filename_format: model-{}-of-{}.safetensors
+    max_filename: "00016"
+  recipe_checkpoint: null
+  output_dir: ${output_dir}
+  model_type: QWEN3_MoE
+resume_from_checkpoint: False
+
+## Fine-tuning arguments
+batch_size: 1
+epochs: 3
+gradient_accumulation_steps: 1  # Use to increase effective batch size
+
+loss:
+  _component_: mirotrain.modules.loss.LigerLinearCrossEntropyLoss
+  # candidate {torchtune.modules.loss.LinearCrossEntropyLoss,
+  #            mirotrain.modules.loss.LigerLinearCrossEntropyLoss}
+
+optimizer:
+  _component_: torch.optim.AdamW
+  fused: False
+  lr: 5e-5
+
+clip_grad_norm: inf
+
+lr_scheduler:
+  _component_: mirotrain.training.get_cosine_schedule_with_warmup
+  warmup_ratio: 0.1
+  num_cycles: 0.5
+
+max_steps_per_epoch: null
+compile: False  # torch.compile the model + loss, True increases speed + decreases memory
+optimizer_in_bwd: False  # True saves memory. Requires gradient_accumulation_steps=1
+
+# Training env
+device: cuda
+
+# Reduced precision
+dtype: bf16
+
+# Logging
+metric_logger:
+  _component_: torchtune.training.metric_logging.DiskLogger
+  log_dir: ${output_dir}/logs
+log_every_n_steps: 1
+log_peak_memory_stats: False
+log_level: INFO  # DEBUG, WARN, etc.
+
+
+# Profiler (disabled)
+profiler:
+  _component_: torchtune.training.setup_torch_profiler
+  enabled: False
+
+  #Output directory of trace artifacts
+  output_dir: ${output_dir}/profiling_outputs
+
+  #`torch.profiler.ProfilerActivity` types to trace
+  cpu: True
+  cuda: True
+
+  #trace options passed to `torch.profiler.profile`
+  profile_memory: False
+  with_stack: False
+  record_shapes: True
+  with_flops: False
+
+  # `torch.profiler.schedule` options:
+  # wait_steps -> wait, warmup_steps -> warmup, active_steps -> active, num_cycles -> repeat
+  wait_steps: 5
+  warmup_steps: 3
+  active_steps: 2
+  num_cycles: 1
