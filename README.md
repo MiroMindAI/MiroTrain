@@ -18,7 +18,7 @@
 
 ## News
 
-- **[2025/08]** MiroTrain-v0.1 is released, support post-training [MiroThinker](https://github.com/MiroMindAI/MiroThinker)!
+- **[2025/08]** Released MiroTrain-v0.1, supporting post-training for [MiroThinker](https://github.com/MiroMindAI/MiroThinker) using the [MiroVerse-v0.1](https://huggingface.co/datasets/miromind-ai/MiroVerse-v0.1) dataset.
 
 ## Overview 
 
