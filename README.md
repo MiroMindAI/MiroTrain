@@ -18,7 +18,22 @@
 
 ## News
 
-- **[2025/08]** Released MiroTrain-v0.1, supporting post-training for [MiroThinker](https://github.com/MiroMindAI/MiroThinker) using the [MiroVerse-v0.1](https://huggingface.co/datasets/miromind-ai/MiroVerse-v0.1) dataset.
+- **[2025/08/15]** Released SFT and DPO recipes for training [MiroThinker](https://github.com/MiroMindAI/MiroThinker) using the [MiroVerse-v0.1](https://huggingface.co/datasets/miromind-ai/MiroVerse-v0.1) dataset. Check them in `recipes/configs/mirothinker_v0_1`. These configs cover three different sizes of MiroThinker models. The training data used is the `MiroVerse-v0.1-all` subset from [MiroVerse-v0.1](https://huggingface.co/datasets/miromind-ai/MiroVerse-v0.1), with the split set to `train`.
+
+  **SFT Configurations:**
+
+  | Hyperparameter | MiroThinker-8B-SFT-v0.1 | MiroThinker-14B-SFT-v0.1 | MiroThinker-32B-SFT-v0.1 |
+  |:---------------|:------------------------:|:-------------------------:|:-------------------------:|
+  | **Epochs**     | 4                        | 3                         | 3                         |
+  | **Learning Rate** | 4e-5                  | 4e-5                      | 4e-5                      |
+  | **Weight Decay** | 0.1                    | 0.1                       | 0.1                       |
+  | **Packed Data** | Enabled             | Enabled                | Enabled                |
+  | **Context Length** | 40k                   | 40k                       | 40k                       |
+  | **Batch Size** | 128                     | 128                       | 128                       |
+  | **Clip Grad Norm** | 1.0                  | 1.0                       | 1.0                       |
+  | **Warmup Ratio** | 0.1                   | 0.1                       | 0.1                       |
+
+- **[2025/08/08]** Released MiroTrain-v0.1, supporting post-training for [MiroThinker](https://github.com/MiroMindAI/MiroThinker) using the [MiroVerse-v0.1](https://huggingface.co/datasets/miromind-ai/MiroVerse-v0.1) dataset.
 
 ## Overview 
 

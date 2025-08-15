@@ -17,7 +17,7 @@ tokenizer:
 
 # Dataset
 dataset:
-  _component_: miromind.datasets.odr_chat_dataset
+  _component_: mirotrain.datasets.odr_chat_dataset
   source: "miromind-ai/MiroVerse-v0.1"
   name: "MiroVerse-v0.1-all"
   split: "train"
