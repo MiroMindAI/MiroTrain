@@ -33,6 +33,20 @@
   | **Clip Grad Norm** | 1.0                  | 1.0                       | 1.0                       |
   | **Warmup Ratio** | 0.1                   | 0.1                       | 0.1                       |
 
+
+  **DPO Configurations:**
+  
+  Use a unified hyper-parameter setting for 8B / 14B / 32B models.
+  
+  | Hyperparameter | MiroThinker-DPO-v0.1 | 
+  |:---------------|:------------------------:|
+  | **Learning Rate**  | 1e-5     | 
+  | **Weight Decay**   | 0.05     | 
+  | **Context Length** | 40k      | 
+  | **Batch Size**     | 32      | 
+  | **Warmup Ratio**   | 0.1      | 
+  | **Beta** | 0.1 |
+
 - **[2025/08/08]** Released MiroTrain-v0.1, supporting post-training for [MiroThinker](https://github.com/MiroMindAI/MiroThinker) using the [MiroVerse-v0.1](https://huggingface.co/datasets/miromind-ai/MiroVerse-v0.1) dataset.
 
 ## Overview 
